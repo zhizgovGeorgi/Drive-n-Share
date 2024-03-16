@@ -3,7 +3,6 @@ package com.drivenshare.traveservice.controller;
 
 import com.drivenshare.traveservice.model.Travel;
 import com.drivenshare.traveservice.service.TravelService;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.cglib.core.Local;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +22,6 @@ import java.util.Optional;
 @RequestMapping("/travels")
 @AllArgsConstructor
 @CrossOrigin("http://localhost:3000")
-@Transactional
 public class TravelController {
     private final TravelService service;
 
