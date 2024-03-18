@@ -1,16 +1,14 @@
-package com.example.travelservice.model;
+package com.example.travelservice.controller;
 
 import lombok.*;
 
-//@Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Setter
-public class Travel {
-//    @Id
-    private Long id;
+
+
+public class CreateTravelRequest {
     @NonNull
     private String startPoint;
     @NonNull
