@@ -14,14 +14,14 @@ on:
   pull_request:
     branches: [ "main" ]
 
-defaults:
-  run:
-    working-directory: travel-service , account-service
-
+ 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix: { dir: ['travel-service', 'account-service'] }
+
 
     steps:
     - uses: actions/checkout@v3
@@ -37,6 +37,8 @@ jobs:
   test:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix: { dir: ['travel-service', 'account-service'] }
     needs: build
 
     steps:
