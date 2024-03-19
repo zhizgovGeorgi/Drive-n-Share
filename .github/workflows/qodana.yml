@@ -7,7 +7,6 @@ on:
       - main # The 'main' branch
       - 'releases/*' # The release branches
       
-s
 jobs:
   qodana:
     runs-on: ubuntu-latest
