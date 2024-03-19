@@ -16,8 +16,7 @@ on:
 
 defaults:
   run:
-    working-directory: travel-service
-    working-directory: account-service
+    working-directory: travel-service , account-service
 
 jobs:
   build:
