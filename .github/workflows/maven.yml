@@ -13,14 +13,21 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
+     
+defaults:
+    run:
+     working-directory: ${{ matrix.dir }}
+       
  
 jobs:
   build:
 
     runs-on: ubuntu-latest
     strategy:
-      matrix: { dir: ['travel-service', 'account-service'] }
+      matrix:
+        dir:
+          - travel-service
+          - account-service
 
 
     steps:
@@ -37,8 +44,6 @@ jobs:
   test:
 
     runs-on: ubuntu-latest
-    strategy:
-      matrix: { dir: ['travel-service', 'account-service'] }
     needs: build
 
     steps:
