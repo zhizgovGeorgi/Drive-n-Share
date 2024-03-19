@@ -6,7 +6,10 @@ on:
     branches: # Specify your branches here
       - main # The 'main' branch
       - 'releases/*' # The release branches
-
+      
+defaults:
+  run:
+    working-directory: travel-service
 jobs:
   qodana:
     runs-on: ubuntu-latest
