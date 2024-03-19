@@ -1,6 +1,7 @@
 package com.example.travelservice.converter;
 
-import com.example.travelservice.controller.CreateTravelRequest;
+import com.example.travelservice.dto.CreateTravelRequest;
+import com.example.travelservice.dto.TravelResponse;
 import com.example.travelservice.model.Travel;
 
 public class TravelConverter {
@@ -13,5 +14,15 @@ public class TravelConverter {
                 .driverId(request.getDriverId())
                 .build();
         return travel;
+    }
+    public static TravelResponse travelToResponse(Travel travel){
+        TravelResponse response = TravelResponse.builder()
+                .startPoint(travel.getStartPoint())
+                .endPoint(travel.getEndPoint())
+                .departureDate(travel.getDepartureDate())
+                .pricePerPerson(travel.getPricePerPerson())
+                .driverId(travel.getDriverId())
+                .build();
+        return response;
     }
 }

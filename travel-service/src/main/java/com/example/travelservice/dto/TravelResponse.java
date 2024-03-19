@@ -1,22 +1,15 @@
-package com.example.travelservice.controller;
+package com.example.travelservice.dto;
 
 import lombok.*;
 
 @Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-
-
-public class CreateTravelRequest {
-    @NonNull
+public class TravelResponse {
     private String startPoint;
-    @NonNull
     private String endPoint;
-    @NonNull
     private double pricePerPerson;
-
     private Long driverId;
-    @NonNull
     private String departureDate;
 }
