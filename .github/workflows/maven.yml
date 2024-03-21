@@ -48,6 +48,10 @@ jobs:
   qodana:
     needs: build-test
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      checks: write
     steps:
       - uses: actions/@checkout3
         with: 
