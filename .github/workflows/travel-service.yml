@@ -11,8 +11,8 @@ name: Java CI with Maven
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    paths:
+    - 'travel-service/**'
      
 
      
@@ -22,11 +22,11 @@ jobs:
   build-test:
 
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dir:
-          - travel-service
-          - account-service
+#    strategy:
+#      matrix:
+#        dir:
+#          - travel-service
+#          - account-service
 
 
     steps:
@@ -39,11 +39,10 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn clean install
-      working-directory: ${{ matrix.dir }}
       
     - name: Test with Maven
       run: mvn test
-      working-directory: ${{ matrix.dir }}
+#      working-directory: ${{ matrix.dir }}
    
   qodana:
     needs: build-test
