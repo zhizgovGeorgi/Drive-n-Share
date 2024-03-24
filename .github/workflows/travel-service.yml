@@ -42,7 +42,7 @@ jobs:
       run: mvn -B package --file travel-service/pom.xml
       
     - name: Test with Maven
-      run: mvn test
+      run: cd travel-service && mvn test
 #      working-directory: ${{ matrix.dir }}
    
   qodana:
