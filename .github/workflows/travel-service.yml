@@ -83,9 +83,9 @@ jobs:
         docker build -t travel-service .
     - name: Tag the image
       run: |
-        docker tag travel-service:latest ${{ secrets.DOCKER_USERNAME }}/green-connect:travel-service-latest
+        docker tag travel-service:latest ${{ secrets.DOCKER_USERNAME }}/drive-n-share:travel-service-latest
     - name: Push the image to Docker Hub
       run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/green-connect:travel-service-latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/drive-n-share:travel-service-latest
    
     
