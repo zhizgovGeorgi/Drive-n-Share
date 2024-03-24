@@ -12,6 +12,7 @@ on:
   push:
     branches: [ "main" ]
     paths:
+    - '.github/workflows/travel-service.yml'
     - 'travel-service/**'
      
 
@@ -38,7 +39,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn clean install
+      run: mvn -B package --file travel-service/pom.xml
       
     - name: Test with Maven
       run: mvn test
