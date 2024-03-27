@@ -87,5 +87,8 @@ jobs:
     - name: Push the image to Docker Hub
       run: |
         docker push ${{ secrets.DOCKER_USERNAME }}/drive-n-share:travel-service-latest
+    - name: Pu the image to Docker 
+      run: |
+        docker pull ${{ secrets.DOCKER_USERNAME }}/drive-n-share:travel-service-latest
    
     
