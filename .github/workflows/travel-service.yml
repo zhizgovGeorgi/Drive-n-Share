@@ -58,7 +58,8 @@ jobs:
          ref: ${{ github.event.pull_request.head.sha}}
          fetch-depth: 0
       - name: 'Qodana scan'
-        uses: JetBrains/qodana-action@v2022.2.3
+        run: cd travel-service
+      - uses: JetBrains/qodana-action@v2022.2.3
         env:
          QODANA_TOKEN: ${{secrets.QODANA_TOKEN}}
 
