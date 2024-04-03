@@ -7,8 +7,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserRequest {
-    private String fName;
-    private String lName;
+    private String firstName;
+    private String lastName;
     private String email;
     private String role;
     private String adress;

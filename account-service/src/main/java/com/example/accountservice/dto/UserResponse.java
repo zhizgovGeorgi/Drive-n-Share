@@ -9,8 +9,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserResponse {
     private Long id;
-    private String firstName;
-    private String lastName;
+    private String fName;
+    private String lName;
     private String email;
     private String adress;
 }

@@ -1,10 +1,10 @@
 package com.example.travelservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.travelservice.exception.InvalidData;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -23,8 +23,17 @@ public class Travel {
     private String endPoint;
     @NonNull
     private double pricePerPerson;
-
     private Long driverId;
     @NonNull
     private String departureDate;
+
+
+public void setEndPoint(String endPoint)throws InvalidData{
+    if(endPoint == this.startPoint){
+        this.endPoint = endPoint;
+    }
+    else{
+        throw new InvalidData();
+    }
+}
 }

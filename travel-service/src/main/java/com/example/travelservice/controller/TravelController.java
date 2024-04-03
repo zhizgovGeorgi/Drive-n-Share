@@ -21,16 +21,34 @@ public class TravelController {
     private final TravelService service;
 
     @GetMapping()
-    public ResponseEntity<List<Travel>> getTravels(){
-//        List<Travel> travels =service.findAll();
-//        return travels.stream().map(this::TravelConverter.travelToResponse()).toList();
-        return ResponseEntity.ok().body(service.findAll());
+    public ResponseEntity<List<TravelResponse>> getTravels(){
+//        return ResponseEntity.ok().body(service.findAll());
+    List<Travel> travels = service.findAll();
+    List<TravelResponse> responses = travels.stream().map(this::mapToResponse).toList();
+    return ResponseEntity.ok().body(responses);
+
     }
 
     @PostMapping()
     public TravelResponse save(@RequestBody  CreateTravelRequest request){
         Travel travel = TravelConverter.requestToTravel(request);
         TravelResponse response = TravelConverter.travelToResponse(service.save(travel));
+        return response;
+    }
+
+    @DeleteMapping()
+    public String deleteTravel(@PathVariable("id") Long id){
+        try {
+            service.deleteById(id);
+            return "Travel has been deleted";
+        }
+        catch (Exception e){
+            return e.getMessage();
+        }
+    }
+
+    private TravelResponse mapToResponse(Travel travel){
+        TravelResponse response = TravelConverter.travelToResponse(travel);
         return response;
     }
 }

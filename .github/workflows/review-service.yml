@@ -13,7 +13,7 @@ on:
     branches: [ "main" ]
     paths:
     - '.github/workflows/review-service.yml'
-    - 'review-service/**'
+    - 'dns-parent/review-service/**'
      
 
      

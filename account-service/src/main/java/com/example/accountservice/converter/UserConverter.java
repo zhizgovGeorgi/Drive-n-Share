@@ -7,8 +7,8 @@ import com.example.accountservice.dto.UserResponse;
 public class UserConverter {
     public static User requestToEntity(UserRequest request) {
         User user = User.builder()
-                .fName(request.getFName())
-                .lName(request.getLName())
+                .fName(request.getFirstName())
+                .lName(request.getLastName())
                 .email(request.getEmail())
                 .password(request.getPassword())
                 .adress(request.getAdress())
@@ -20,8 +20,8 @@ public class UserConverter {
     public static UserResponse entityToResponse(User user) {
         UserResponse response = UserResponse.builder()
                 .id(user.getId())
-                .firstName(user.getFName())
-                .lastName(user.getLName())
+                .fName(user.getFName())
+                .lName(user.getLName())
                 .email(user.getEmail())
                 .adress(user.getAdress())
                 .build();

@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<UserResponse>> getTravels(String role){
+    public ResponseEntity<List<UserResponse>> getAllTravelRequests(String role){
 //        return ResponseEntity.ok().body(service.findAll());
         List<User> drivers = service.findUserByRole(role);
         List<UserResponse> responses = drivers.stream().map(this::mapToResponse).toList();

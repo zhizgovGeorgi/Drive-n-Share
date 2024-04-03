@@ -5,12 +5,13 @@ import com.example.accountservice.domain.User;
 import com.example.accountservice.dto.UserRequest;
 import com.example.accountservice.exception.InvalidData;
 import com.example.accountservice.persistence.UserRepository;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
     private UserRepository repository;
 

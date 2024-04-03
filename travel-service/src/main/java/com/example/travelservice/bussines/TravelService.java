@@ -9,4 +9,5 @@ public interface TravelService {
     Travel findByEndPoint(Travel travel);
     Travel findByStartPoint(Travel travel);
     List<Travel> findAll();
+    void deleteById(Long id) throws Exception;
 }
