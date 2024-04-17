@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 @Transactional
@@ -19,13 +21,43 @@ public class TravelServiceImpl implements TravelService {
     }
 
     @Override
-    public Travel findByEndPoint(Travel travel) {
-        return null;
+    public List<Travel>findByEndPoint(String endPoint) {
+        if(repository.findByEndPoint(endPoint) == null ) {
+            return null;
+        }
+        else {
+            return repository.findByEndPoint(endPoint);
+        }
+    }
+    @Override
+    public List<Travel>findByDriver(Long driverId) {
+        if(repository.findByDriverId(driverId) == null ) {
+            return null;
+        }
+        else {
+            return repository.findByDriverId(driverId);
+        }
+    }
+
+
+    @Override
+    public List<Travel> findByStartPoint(String startPoint) {
+        if(repository.findByStartPoint(startPoint) == null ) {
+            return null;
+        }
+        else {
+            return repository.findByStartPoint(startPoint);
+        }
     }
 
     @Override
-    public Travel findByStartPoint(Travel travel) {
-        return null;
+    public List<Travel> findByStartAndEndPoint(String startPoint, String endPoint) {
+        if(repository.findByStartPointAndEndPoint(startPoint, endPoint) == null ) {
+            return null;
+        }
+        else {
+            return repository.findByStartPointAndEndPoint(startPoint, endPoint);
+        }
     }
 
     @Override
@@ -35,7 +67,7 @@ public class TravelServiceImpl implements TravelService {
 
     @Override
     public void deleteById(Long id) throws Exception {
-        if (repository.findById(id) != null){
+        if (repository. findById(id) != null){
             repository.deleteById(id);
         }
         else {

@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
         <module name="travel-service" />
+        <module name="auth-service" />
         <module name="discovery-server" />
         <module name="account-service" />
         <module name="review-service" />
@@ -17,6 +18,7 @@
     <bytecodeTargetLevel>
       <module name="account-service" target="17" />
       <module name="api-gateway" target="17" />
+      <module name="auth-service" target="17" />
       <module name="discovery-server" target="17" />
       <module name="review-service" target="17" />
       <module name="travel-service" target="17" />
@@ -26,6 +28,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="account-service" options="-parameters" />
       <module name="api-gateway" options="-parameters" />
+      <module name="auth-service" options="-parameters" />
       <module name="discovery-server" options="-parameters" />
       <module name="review-service" options="-parameters" />
       <module name="travel-service" options="-parameters" />

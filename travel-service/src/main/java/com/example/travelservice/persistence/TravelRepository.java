@@ -11,4 +11,8 @@ public interface TravelRepository extends JpaRepository<Travel, Long> {
     Travel save(Travel travel);
     List<Travel>findAll();
     Optional<Travel> findById(Long id);
+    List<Travel> findByDriverId(Long driverId);
+    List<Travel> findByStartPointAndEndPoint(String startPoint, String endPoint);
+    List<Travel> findByStartPoint(String startPoint);
+    List<Travel> findByEndPoint(String endPoint);
 }
