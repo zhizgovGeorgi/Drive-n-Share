@@ -1,0 +1,29 @@
+.navbar{
+  /* background-color: #efe5e5; */
+  height: 50px;
+  width: max-width;
+  border-bottom: 2px solid rgb(0, 191, 111);
+}
+
+.navbarlogo{
+  float: left;
+ height:auto;
+ width: auto;
+ max-width: 250px;
+ max-height: 57px;
+}
+
+.navbarbuttons{
+  float:right;
+}
+
+ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li{
+  display: inline;
+  margin:20px;
+}
