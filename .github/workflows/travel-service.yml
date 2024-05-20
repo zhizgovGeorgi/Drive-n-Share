@@ -73,7 +73,7 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: cd travel-service && mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=zhizgovgeorgi && mvn sonar:sonar -Pcoverage
+        run: cd travel-service && mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=zhizgovGeorgi_Drive-n-Share && mvn sonar:sonar -Pcoverage
 
   docker:
    needs: [ sonarcloud ]
