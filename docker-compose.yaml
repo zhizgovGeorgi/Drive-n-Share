@@ -90,20 +90,22 @@ services:
    container_name: mysql
    environment:
      MYSQL_USER: root
-     MYSQL_DB: dns_travel_service
+#     MYSQL_DATABASE: dns_travel_service
      MYSQL_PASSWORD: 1234567
      MYSQL_ROOT_PASSWORD: root
    ports:
-     - "5432:3306"
+     - "3307:3306"
 
  travel-service:
        image: zhizgov/drive-n-share:travel-service-latest
        container_name: travel-service-container
+#       build:
+#         dockerfile: ./travel-service/Dockerfile
        ports:
          - "8081:8081"
        environment:
-         SPRING_DATASOURCE_URL: jdbc:mysql://localhost:5432/dns_travel_service?serverTimeZone=UTC
-         SPRING_DATASOURCE_USERNAME: root
-         SPRING_DATASOURCE_PASSWORD: 1234567
+         SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3307/dns_travel_service
+#         SPRING_DATASOURCE_USERNAME: root
+#         SPRING_DATASOURCE_PASSWORD: 1234567
        depends_on:
          -  mysql
