@@ -40,7 +40,7 @@ jobs:
     - name: Test with Maven
       run: cd account-service && mvn test
    
-   sonarcloud:
+  sonarcloud:
     needs: build-test
     name: Sonarcloud
     runs-on: ubuntu-latest
