@@ -39,7 +39,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file travel-service/pom.xml
+      run: mvn clean && mvn -B package --file travel-service/pom.xml
       
     - name: Test with Maven
       run: cd travel-service && mvn test
