@@ -41,7 +41,7 @@ WORKDIR /app
 
 
 # Copy the built JAR file into the container
-COPY target/*.jar /app/travel-service-0.0.1-SNAPSHOT.jar
+COPY target/*.jar /app/travel-service.jar
 
 # Expose port 8081 (assuming your application listens on port 8081)
 EXPOSE 8081
