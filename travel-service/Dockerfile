@@ -33,7 +33,7 @@
 #ENTRYPOINT ["java","-jar","/app.jar"]
 
 
-FROM openjdk:21-jdk-slim
+FROM openjdk:17-jdk-slim
 
 # Set the working directory in the container
 WORKDIR /app
