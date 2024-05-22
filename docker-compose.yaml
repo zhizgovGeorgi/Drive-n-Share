@@ -105,7 +105,7 @@ services:
          - "8081:8081"
        environment:
          SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3307/dns_travel_service
-#         SPRING_DATASOURCE_USERNAME: root
-#         SPRING_DATASOURCE_PASSWORD: 1234567
+         SPRING_DATASOURCE_USERNAME: root
+         SPRING_DATASOURCE_PASSWORD: 1234567
        depends_on:
          -  mysql
