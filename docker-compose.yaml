@@ -97,10 +97,10 @@ services:
      - "3307:3306"
 
  travel-service:
-       image: zhizgov/drive-n-share:travel-service-latest
+#       image: zhizgov/drive-n-share:travel-service-latest
        container_name: travel-service-container
-#       build:
-#         dockerfile: ./travel-service/Dockerfile
+       build:
+         dockerfile: ./travel-service/Dockerfile
        ports:
          - "8081:8081"
        environment:
