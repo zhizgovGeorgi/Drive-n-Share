@@ -1,6 +1,7 @@
 package com.example.accountservice.converter;
 
 import com.example.accountservice.domain.User;
+import com.example.accountservice.dto.UpdateUserRequest;
 import com.example.accountservice.dto.UserRequest;
 import com.example.accountservice.dto.UserResponse;
 
@@ -26,5 +27,11 @@ public class UserConverter {
                 .adress(user.getAdress())
                 .build();
         return response;
+    }
+    public static User updateRequestToUser(User user, UpdateUserRequest request) {
+        user.setFName(request.getFirstName());
+        user.setLName(request.getLastName());
+        user.setAdress(request.getAdress());
+        return user;
     }
 }
