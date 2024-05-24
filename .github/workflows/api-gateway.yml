@@ -67,8 +67,8 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Build and analyze
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: cd api-gateway && mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=zhizgovGeorgi_Drive-n-Share && mvn sonar:sonar -Pcoverage
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_GATEWAY }}
+        run: cd api-gateway && mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=zhizgovgeorgi_Drive-n-Share-api-gateway && mvn sonar:sonar -Pcoverage
 
   docker:
    needs: [ sonarcloud ]
