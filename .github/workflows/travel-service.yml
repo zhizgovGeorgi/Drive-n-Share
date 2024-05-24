@@ -93,7 +93,7 @@ jobs:
     - name: Building an image
       run: |
         cd travel-service
-        ls -l target
+        #ls -l target
         docker build -t travel-service .
     - name: Tag the image
       run: |
