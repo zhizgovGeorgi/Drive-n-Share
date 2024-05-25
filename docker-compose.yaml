@@ -85,25 +85,16 @@ services:
        - GF_SECURITY_ADMIN_USER=admin
        - GF_SECURITY_ADMIN_PASSWORD=password
 
- mysql_travel:
+ mysql:
    image: mysql:8
-   container_name: mysql_travel
+   container_name: mysql
    environment:
 #     MYSQL_USERNAME: root
-     MYSQL_DATABASE: dns_travel_service
+#     MYSQL_DATABASE: dns_travel_service
      MYSQL_ROOT_PASSWORD: 1234567
    ports:
      - "3307:3307"
 
- mysql_account:
-   image: mysql:8
-   container_name: mysql_account
-   environment:
-     #     MYSQL_USERNAME: root
-     MYSQL_DATABASE: dns_account_service
-     MYSQL_ROOT_PASSWORD: 1234567
-   ports:
-     - "3305:3305"
 
 
  travel-service:
@@ -114,12 +105,12 @@ services:
        ports:
          - "8081:8081"
        environment:
-         SPRING_DATASOURCE_URL: jdbc:mysql://mysql_travel:3307/dns_travel_service
+         SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/dns_travel_service
          SPRING_PROFILES_ACTIVATE: docker
 #         SPRING_DATASOURCE_USERNAME: root
 #         SPRING_DATASOURCE_PASSWORD: 1234567
        depends_on:
-         -  mysql_travel
+         -  mysql
 
  account-service:
      image: zhizgov/drive-n-share:account-service-latest
@@ -129,12 +120,14 @@ services:
      ports:
        - "8082:8082"
      environment:
-       SPRING_DATASOURCE_URL: jdbc:mysql://mysql_account:3305/dns_account_service
+       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/dns_account_service
        SPRING_PROFILES_ACTIVATE: docker
      #         SPRING_DATASOURCE_USERNAME: root
      #         SPRING_DATASOURCE_PASSWORD: 1234567
      depends_on:
-       - mysql_account
+       - mysql
+
+
  api-gateway:
    image: zhizgov/drive-n-share:api-gateway-latest
    container_name: api-gateway
