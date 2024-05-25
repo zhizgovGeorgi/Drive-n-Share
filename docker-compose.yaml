@@ -87,13 +87,13 @@ services:
 
  mysql:
    image: mysql:8
-   container_name:  mysql-db
+   container_name:  db
    environment:
 #     MYSQL_USERNAME: root
-     MYSQL_DATABASE: dns_travel_service
+#     MYSQL_DATABASE: dns_travel_service
      MYSQL_ROOT_PASSWORD: 1234567
    ports:
-     - "3307:3306"
+     - "3306:3306"
    volumes:
      - mysql-db-data:/var/lib/mysql
 
