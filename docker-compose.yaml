@@ -87,13 +87,11 @@ services:
 
  mysql:
    image: mysql:8
-   container_name:  db
+   container_name: mysql
    environment:
 #     MYSQL_USERNAME: root
 #     MYSQL_DATABASE: dns_travel_service
      MYSQL_ROOT_PASSWORD: 1234567
-   ports:
-     - "3306:3306"
    volumes:
      - mysql-db-data:/var/lib/mysql
 
@@ -109,7 +107,7 @@ services:
        ports:
          - "8081:8081"
        environment:
-         SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3307/dns_travel_service
+         SPRING_DATASOURCE_URL: jdbc:mysql://mysql/dns_travel_service
          SPRING_PROFILES_ACTIVATE: docker
 #         SPRING_DATASOURCE_USERNAME: root
 #         SPRING_DATASOURCE_PASSWORD: 1234567
