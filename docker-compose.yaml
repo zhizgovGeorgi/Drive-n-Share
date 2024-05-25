@@ -87,13 +87,15 @@ services:
 
  mysql:
    image: mysql:8
-   container_name:  mysql
+   container_name:  mysql-db
    environment:
 #     MYSQL_USERNAME: root
      MYSQL_DATABASE: dns_travel_service
      MYSQL_ROOT_PASSWORD: 1234567
    ports:
      - "3307:3306"
+   volumes:
+     - mysql-db-data:/var/lib/mysql
 
 
 
@@ -101,13 +103,13 @@ services:
 
  travel-service:
        image: zhizgov/drive-n-share:travel-service-latest
-       container_name: travel-service-container
+       container_name: travel-service
 #       build:
 #         dockerfile: ./travel-service/Dockerfile
        ports:
          - "8081:8081"
        environment:
-         SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3307/dns_travel_service
+         SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3307/dns_travel_service
          SPRING_PROFILES_ACTIVATE: docker
 #         SPRING_DATASOURCE_USERNAME: root
 #         SPRING_DATASOURCE_PASSWORD: 1234567
@@ -154,3 +156,6 @@ services:
 #     SPRING_DATASOURCE_PASSWORD: 1234567
 #   depends_on:
 #     - mysql
+
+volumes:
+  mysql-db-data:
