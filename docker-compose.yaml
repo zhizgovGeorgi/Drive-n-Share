@@ -67,8 +67,8 @@ services:
      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
    depends_on:
      - travel-service
-#     - account-service
-#     - api-gateway
+     - account-service
+     - api-gateway
 #     - discovery-server
 
  grafana:
@@ -89,8 +89,6 @@ services:
    image: mysql:8
    container_name: mysql
    environment:
-#     MYSQL_USERNAME: root
-#     MYSQL_DATABASE: dns_travel_service
      MYSQL_ROOT_PASSWORD: 1234567
    volumes:
      - mysql-db-data:/var/lib/mysql
@@ -109,25 +107,19 @@ services:
        environment:
          SPRING_DATASOURCE_URL: jdbc:mysql://mysql/dns_travel_service
          SPRING_PROFILES_ACTIVATE: docker
-#         SPRING_DATASOURCE_USERNAME: root
-#         SPRING_DATASOURCE_PASSWORD: 1234567
        depends_on:
          -  mysql
 
-# account-service:
-#     image: zhizgov/drive-n-share:account-service-latest
-#     container_name: account-service
-#     #       build:
-#     #         dockerfile: ./travel-service/Dockerfile
-#     ports:
-#       - "8082:8082"
-#     environment:
-#       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3307/dns_account_service
-#       SPRING_PROFILES_ACTIVATE: docker
-#     #         SPRING_DATASOURCE_USERNAME: root
-#     #         SPRING_DATASOURCE_PASSWORD: 1234567
-#     depends_on:
-#       - mysql
+ account-service:
+     image: zhizgov/drive-n-share:account-service-latest
+     container_name: account-service
+     ports:
+       - "8082:8082"
+     environment:
+       SPRING_DATASOURCE_URL: jdbc:mysql://mysql/dns_account_service
+       SPRING_PROFILES_ACTIVATE: docker
+     depends_on:
+       - mysql
 
 
  api-gateway:
@@ -141,19 +133,32 @@ services:
      SPRING_PROFILES_ACTIVATE: docker
    #         SPRING_DATASOURCE_USERNAME: root
    #         SPRING_DATASOURCE_PASSWORD: 1234567
-# review-service:
-#   image: zhizgov/drive-n-share:review-service-latest
-#   container_name: review-service
-#   #       build:
-#   #         dockerfile: ./travel-service/Dockerfile
-#   ports:
-#     - "8083:8083"
-#   environment:
-#     SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3307/dns_review_service
-#     SPRING_DATASOURCE_USERNAME: root
-#     SPRING_DATASOURCE_PASSWORD: 1234567
-#   depends_on:
-#     - mysql
+
+ discovery-server:
+   image: zhizgov/drive-n-share:discovery-server-latest
+   container_name: discovery-server
+   #       build:
+   #         dockerfile: ./travel-service/Dockerfile
+   ports:
+     - "8761:8761"
+   environment:
+     SPRING_PROFILES_ACTIVATE: docker
+   #         SPRING_DATASOURCE_USERNAME: root
+   #         SPRING_DATASOURCE_PASSWORD: 1234567
+
+ review-service:
+   image: zhizgov/drive-n-share:review-service-latest
+   container_name: review-service
+   #       build:
+   #         dockerfile: ./travel-service/Dockerfile
+   ports:
+     - "8083:8083"
+   environment:
+     SPRING_DATASOURCE_URL: jdbc:mysql://mysql/dns_review_service
+     SPRING_DATASOURCE_USERNAME: root
+     SPRING_DATASOURCE_PASSWORD: 1234567
+   depends_on:
+     - mysql
 
 volumes:
   mysql-db-data:
