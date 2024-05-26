@@ -10,9 +10,7 @@ import java.util.List;
 @Data
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+    @AllArgsConstructor
 public class Travel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

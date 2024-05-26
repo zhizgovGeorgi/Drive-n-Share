@@ -5,8 +5,8 @@ services:
  zookeeper:
   image: confluentinc/cp-zookeeper:7.0.1
   container_name: zookeeper
-#  ports:
-#    - "2181:2181"
+  ports:
+    - "2181:2181"
   environment:
     ZOOKEEPER_CLIENT_PORT: 2181
     ZOOKEEPER_TICK_TIME: 2000
@@ -67,7 +67,7 @@ services:
      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
    depends_on:
      - travel-service
-     - account-service
+#     - account-service
      - api-gateway
 #     - discovery-server
 
@@ -89,9 +89,21 @@ services:
    image: mysql:8
    container_name: mysql
    environment:
+#     MYSQL_DATABASE: dns_travel_service
      MYSQL_ROOT_PASSWORD: 1234567
    volumes:
      - mysql-db-data:/var/lib/mysql
+
+# mysql-account:
+#   image: mysql:8
+#   container_name: mysql-account
+#   environment:
+#     MYSQL_DATABASE: dns_account_service
+#     MYSQL_ROOT_PASSWORD: 1234567
+#   ports:
+#     - "3307:3307"
+#   volumes:
+#     - mysql-db-data:/var/lib/mysql
 
 
 
