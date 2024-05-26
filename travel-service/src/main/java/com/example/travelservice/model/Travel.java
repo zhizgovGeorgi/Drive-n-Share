@@ -7,10 +7,11 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
-    @AllArgsConstructor
+@AllArgsConstructor
 public class Travel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
