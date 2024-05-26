@@ -21,6 +21,7 @@ public class Travel {
     private String endPoint;
     @NonNull
     private double pricePerPerson;
+    @NonNull
     private Long driverId;
     @NonNull
     private String departureDate;
@@ -28,10 +29,10 @@ public class Travel {
 
 public void setEndPoint(String endPoint)throws InvalidData{
     if(endPoint == this.startPoint){
-        this.endPoint = endPoint;
+        throw new InvalidData();
     }
     else{
-        throw new InvalidData();
+        this.endPoint = endPoint;
     }
 }
 }

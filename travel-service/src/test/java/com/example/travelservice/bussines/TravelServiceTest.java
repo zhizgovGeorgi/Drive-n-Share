@@ -43,6 +43,7 @@ public class TravelServiceTest {
         verify(repository, times(1)).save(any(Travel.class));
     }
 
+
     //HAPPY FLOW
     @Test
     void findByEndPoint_shouldReturnCorrectList(){
