@@ -1,13 +1,9 @@
 package com.example.travelservice.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Builder
-@Data
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
 public class FindTravelRequest {
     private String startPoint;

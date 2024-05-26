@@ -3,8 +3,7 @@ package com.example.travelservice.dto;
 import lombok.*;
 
 @Builder
-@Data
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
 public class CreateTravelRequest {
     @NonNull
