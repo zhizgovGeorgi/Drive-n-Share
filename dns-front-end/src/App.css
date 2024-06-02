@@ -7,23 +7,51 @@
 
 .navbarlogo{
   float: left;
- height:auto;
- width: auto;
- max-width: 250px;
- max-height: 57px;
+  height:auto;
+  width: auto;
+  max-width: 250px;
+  max-height: 57px;
 }
 
 .navbarbuttons{
   float:right;
+  width: fit-content;
 }
+.navbarbutton{
+  background-color: antiquewhite;
+  border-radius: 5px;
+  width: fit-content;
+  border: none;
+  text-decoration: none;
+}
+.navbarbutton:hover{
+  border:2px solid rgb(0, 191, 111);
+}
+
 
 ul{
   list-style-type: none;
   margin: 0;
   padding: 0;
+  list-style-type: none;
 }
 
 li{
+  
   display: inline;
   margin:20px;
+  
+}
+
+.registerPanel{
+  display: grid;
+
+}
+
+
+.registerproperties{
+  margin-bottom: 19px;
+}
+.registerproperties input{
+  margin-left: 19px;
 }

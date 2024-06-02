@@ -1,10 +1,13 @@
 package com.example.travelservice.bussines.impl;
 
 import com.example.travelservice.bussines.TravelService;
+import com.example.travelservice.converter.TravelConverter;
 import com.example.travelservice.model.Travel;
 import com.example.travelservice.persistence.TravelRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,8 +63,9 @@ public class TravelServiceImpl implements TravelService {
     }
 
     @Override
-    public List<Travel> findAll() {
-        return repository.findAll();
+    public List<Travel> findAll(int pageNumber) {
+        Pageable firstPageable = PageRequest.of(pageNumber, 20);
+        return repository.findAll(firstPageable).toList();
     }
 
     @Override

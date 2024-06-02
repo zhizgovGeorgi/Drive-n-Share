@@ -9,7 +9,7 @@ public interface TravelService {
     Travel save(Travel travel);
     List<Travel> findByEndPoint(String endPoint);
     List<Travel> findByStartPoint(String startPoint);
-    List<Travel> findAll();
+    List<Travel> findAll(int pageNumber);
     List<Travel>findByDriver(Long driverId);
     List<Travel> findByStartAndEndPoint(String startPoint, String endPoint);
     void deleteById(Long id) throws Exception;

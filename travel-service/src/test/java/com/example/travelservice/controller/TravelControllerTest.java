@@ -151,7 +151,7 @@ public class TravelControllerTest {
         String expected = (new ObjectMapper()).writeValueAsString(result);
 
         //ACT
-        when(service.findAll()).thenReturn(travels);
+        when(service.findAll(1)).thenReturn(travels);
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/travels")
                 .contentType(MediaType.APPLICATION_JSON);
 

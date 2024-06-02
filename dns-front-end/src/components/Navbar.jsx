@@ -11,8 +11,8 @@ export default function Navbar() {
         </div>
         <div className="navbarbuttons">
             <ul>
-      <li> <button><Link to={'/register'}><a>Register</a></Link></button> </li>
-      <li><a>Hello 1</a></li>
+      <li> <button className='navbarbutton'><Link to={'/register'}><a>Register</a></Link></button> </li>
+      <li> <button className='navbarbutton'><Link to={'/login'}><a>Log in</a></Link></button> </li>
       <li><a>Hello 1</a></li>
       </ul>
       </div>

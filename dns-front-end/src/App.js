@@ -4,7 +4,8 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Register from './components/Register.jsx';
-import { ToastContainer } from 'react-toastify';
+import Login from './components/Login.jsx';
+import { ToastContainer, toast } from 'react-toastify';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ theme="dark"
       <Navbar/>
         <Routes>
         <Route path='/register' element={ <Register/>} />
+        <Route path='/login' element={ <Login/>} />
           
 
         </Routes>

@@ -32,7 +32,7 @@ public class UserController {
             User user = UserConverter.requestToEntity(request);
             UserResponse response = UserConverter.entityToResponse(service.save(user));
 //            return ResponseEntity.created(uri).body(response);
-            return ResponseEntity.ok().body("User has been created successfully");
+            return ResponseEntity.created(uri).body("User has been created successfully");
         }
         catch (DuplicationException err){
             throw err;

@@ -21,10 +21,10 @@ import static java.util.stream.Collectors.toList;
 public class TravelController {
     private final TravelService service;
 
-    @GetMapping()
-    public ResponseEntity<List<TravelResponse>> getTravels(){
+    @GetMapping("{pageNumber}")
+    public ResponseEntity<List<TravelResponse>> getTravels(@PathVariable("pageNumber")int pageNumber){
 //        return ResponseEntity.ok().body(service.findAll());
-    List<Travel> travels = service.findAll();
+    List<Travel> travels = service.findAll(pageNumber);
     List<TravelResponse> responses = travels.stream().map(this::mapToResponse).toList();
     return ResponseEntity.ok().body(responses);
 
@@ -67,7 +67,7 @@ public class TravelController {
         return response;
     }
 
-    @DeleteMapping()
+    @DeleteMapping("{id}")
     public String deleteTravel(@PathVariable("id") Long id){
         try {
             service.deleteById(id);
