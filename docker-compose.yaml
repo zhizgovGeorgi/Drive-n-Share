@@ -68,7 +68,7 @@ services:
    depends_on:
      - travel-service
 #     - account-service
-     - api-gateway
+#     - api-gateway
 #     - discovery-server
 
  grafana:
@@ -122,29 +122,29 @@ services:
        depends_on:
          -  mysql
 
- account-service:
-     image: zhizgov/drive-n-share:account-service-latest
-     container_name: account-service
-     ports:
-       - "8082:8082"
-     environment:
-       SPRING_DATASOURCE_URL: jdbc:mysql://mysql/dns_account_service
-       SPRING_PROFILES_ACTIVATE: docker
-     depends_on:
-       - mysql
-
-
- api-gateway:
-   image: zhizgov/drive-n-share:api-gateway-latest
-   container_name: api-gateway
-   #       build:
-   #         dockerfile: ./travel-service/Dockerfile
-   ports:
-     - "8084:8084"
-   environment:
-     SPRING_PROFILES_ACTIVATE: docker
-   #         SPRING_DATASOURCE_USERNAME: root
-   #         SPRING_DATASOURCE_PASSWORD: 1234567
+# account-service:
+#     image: zhizgov/drive-n-share:account-service-latest
+#     container_name: account-service
+#     ports:
+#       - "8082:8082"
+#     environment:
+#       SPRING_DATASOURCE_URL: jdbc:mysql://mysql/dns_account_service
+#       SPRING_PROFILES_ACTIVATE: docker
+#     depends_on:
+#       - mysql
+#
+#
+# api-gateway:
+#   image: zhizgov/drive-n-share:api-gateway-latest
+#   container_name: api-gateway
+#   #       build:
+#   #         dockerfile: ./travel-service/Dockerfile
+#   ports:
+#     - "8084:8084"
+#   environment:
+#     SPRING_PROFILES_ACTIVATE: docker
+#   #         SPRING_DATASOURCE_USERNAME: root
+#   #         SPRING_DATASOURCE_PASSWORD: 1234567
 
  discovery-server:
    image: zhizgov/drive-n-share:discovery-server-latest
