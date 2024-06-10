@@ -108,7 +108,7 @@ jobs:
    steps:
     - name: Deploy to Minikube
       run: |
-        cd ../../
+        cd travel-service
         kubectl apply -f mysql-travel-deployment.yaml
         kubectl apply -f mysql_service-deployment.yaml
         kubectl apply -f travel-service-deployment.yaml
