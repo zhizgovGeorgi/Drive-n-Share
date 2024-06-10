@@ -15,4 +15,6 @@ public interface TravelRepository extends JpaRepository<Travel, Long> {
     List<Travel> findByStartPointAndEndPoint(String startPoint, String endPoint);
     List<Travel> findByStartPoint(String startPoint);
     List<Travel> findByEndPoint(String endPoint);
+    void deleteByDriverId(Long driverId);
+    void deleteTravelsByDriverId(Long driverId);
 }

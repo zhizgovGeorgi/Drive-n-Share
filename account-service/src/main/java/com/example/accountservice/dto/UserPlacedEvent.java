@@ -6,9 +6,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class UserPlacedEvent {
+    public UserPlacedEvent(){
+
+    }
     private Long id;
     private String email;
     private String password;

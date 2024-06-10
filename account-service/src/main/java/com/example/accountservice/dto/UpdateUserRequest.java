@@ -16,4 +16,6 @@ public class UpdateUserRequest {
     private String lastName;
     @NonNull
     private String adress;
+    @NonNull
+    private String password;
 }

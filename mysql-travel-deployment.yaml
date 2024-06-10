@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yaml
+    kompose.version: 1.31.2 (a92241f79)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mysql-travel
+  name: mysql-travel
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mysql-travel
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yaml
+        kompose.version: 1.31.2 (a92241f79)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/drive-n-share-default: "true"
+        io.kompose.service: mysql-travel
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_DATABASE
+              value: dns_travel_service
+            - name: MYSQL_ROOT_PASSWORD
+              value: "1234567"
+            - name: MYSQL_TCP_PORT
+              value: "3308"
+          image: mysql:8
+          name: mysql-travel
+          ports:
+            - containerPort: 3308
+              hostPort: 3308
+              protocol: TCP
+          resources: {}
+      restartPolicy: Always
+status: {}

@@ -15,8 +15,13 @@ import { Link, useNavigate } from 'react-router-dom';
 // }));
 
 export default function Register() {
-  
-//   const navigate = useNavigate();
+    const [isChecked, setIsChecked] = useState(false);
+
+    const handleCheckboxChange = (event) => {
+        setIsChecked(event.target.checked);
+      };
+      
+  const navigate = useNavigate();
   
     // const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto "}
   const [firstName, setFName]=useState('');
@@ -27,6 +32,7 @@ export default function Register() {
   const role = 'Driver';
 //     // const classes = useStyles();
 const register =  () =>{
+    if(isChecked){
     const user={firstName, lastName, email, adress, password, role}
     console.log(firstName);
     console.log(lastName);
@@ -36,10 +42,13 @@ const register =  () =>{
 
   
      AccountService.register({user}).then(res=>{
-      // navigate('/login') 
+      navigate('/login') 
       toast.success("Successful registration! Time to log in!")
-      // navigate("/login")
     })
+}
+else{
+    toast.error("Please consent to our privacy policy")
+}
 }  
     
   
@@ -65,7 +74,10 @@ const register =  () =>{
     </div>
     <div className='registerproperties'>
     <label for="password">Password:</label>
-    <input onChange={(e)=>setPassword(e.target.value)} type="text" id="password" name="password"/>
+    <input onChange={(e)=>setPassword(e.target.value)} type="password" id="password" name="password"/>
+    </div>
+    <div className='registerproperties'>
+    <input name='policycheck' checked={isChecked} onChange={handleCheckboxChange} type='checkbox'/> <a>I hereby consent for my data to be stored according to the pivacy policy</a>
     </div>
 
     <div className='registerButtondiv'>

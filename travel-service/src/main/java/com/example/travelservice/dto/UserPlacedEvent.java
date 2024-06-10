@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 public class UserPlacedEvent {
+    public UserPlacedEvent(){
+
+    }
     private Long id;
     private String email;
     private String password;

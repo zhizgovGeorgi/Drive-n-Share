@@ -64,14 +64,15 @@ public class UserServiceImpl implements UserService {
         if (!userForDeletion.equals(deletingUser)){
             throw new IllegalArgumentException("You do not have the right to delete this account");
         }
+        kafkaDeletionTemplate.send("userDeletion", new UserDeletionPlacedEvent(id.longValue()));
         repository.deleteById(id);
         //sends it to the rest of the services, where everything related to the user will be deleted
-        kafkaDeletionTemplate.send("userDeletion", new UserDeletionPlacedEvent(id));
 
     }
 
     @Override
     public User updateUser(User updateRequest) {
+        updateRequest.setPassword(encoder.encode(updateRequest.getPassword()));
         return repository.save(updateRequest);
     }
 

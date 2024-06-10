@@ -43,15 +43,16 @@ li{
   
 }
 
-.registerPanel{
+.registerPanel, .loginpanel{
   display: grid;
 
 }
 
 
-.registerproperties{
+.registerproperties, .loginproperties{
   margin-bottom: 19px;
 }
-.registerproperties input{
+.registerproperties input, .loginproperties input{
   margin-left: 19px;
 }
+
