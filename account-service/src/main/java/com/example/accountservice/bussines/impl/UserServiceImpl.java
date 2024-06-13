@@ -2,16 +2,20 @@ package com.example.accountservice.bussines.impl;
 
 import com.example.accountservice.bussines.UserService;
 import com.example.accountservice.domain.User;
+import com.example.accountservice.dto.RequestResponse;
 import com.example.accountservice.dto.UserDeletionPlacedEvent;
 import com.example.accountservice.dto.UserPlacedEvent;
 import com.example.accountservice.exception.DuplicationException;
 import com.example.accountservice.exception.InvalidData;
 import com.example.accountservice.persistence.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +23,8 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
     private UserRepository repository;
+
+    private AzureBlobService azureBlobStorageService;
     private final PasswordEncoder encoder;
     private final KafkaTemplate<String, UserPlacedEvent> kafkaTemplate;
     private final KafkaTemplate<String, UserDeletionPlacedEvent> kafkaDeletionTemplate;
@@ -61,12 +67,22 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long id, Long userId) {
         Optional<User> userForDeletion = repository.findById(id);
         Optional<User>deletingUser = repository.findById(userId);
+        User blobUserToDelete = repository.findUserById(id);
         if (!userForDeletion.equals(deletingUser)){
             throw new IllegalArgumentException("You do not have the right to delete this account");
         }
         kafkaDeletionTemplate.send("userDeletion", new UserDeletionPlacedEvent(id.longValue()));
+        azureBlobStorageService.deleteBlob(blobUserToDelete.getEmail());
         repository.deleteById(id);
         //sends it to the rest of the services, where everything related to the user will be deleted
+
+    }
+    @Override
+    public String requestDriversAccount(MultipartFile file , String email) throws IOException {
+        User currentUser = repository.findByEmail(email);
+        currentUser.setRole("Driver-to-be");
+        updateUser(currentUser);
+        return azureBlobStorageService.upload(file, email);
 
     }
 
@@ -79,5 +95,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return repository.findByEmail(email);
+    }
+
+    @Override
+    public String respondToDriversRequest(RequestResponse requestResponse) {
+        User drivee = findByEmail(requestResponse.getDriveeEmail());
+        if (findByEmail(requestResponse.getAdminEmail()).getRole() == "Administrator"){
+            if (requestResponse.getRespond() == "Approve"){
+                drivee.setRole("Driver");
+                return updateUser(drivee).getRole();
+            } else if (requestResponse.getRespond() == "Decline") {
+                drivee.setRole("Drivee");
+                return updateUser(drivee).getRole();
+            }
+
+        }
+            return "Sorry but you are not authorized for this kind of action!";
     }
 }

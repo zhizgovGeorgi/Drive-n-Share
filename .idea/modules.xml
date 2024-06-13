@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/Drive-n-Share.iml" filepath="$PROJECT_DIR$/.idea/Drive-n-Share.iml" />
       <module fileurl="file://$PROJECT_DIR$/account-service/account-service.iml" filepath="$PROJECT_DIR$/account-service/account-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/api-gateway/api-gateway.iml" filepath="$PROJECT_DIR$/api-gateway/api-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/auth-service/auth-service.iml" filepath="$PROJECT_DIR$/auth-service/auth-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/discovery-server/discovery-server.iml" filepath="$PROJECT_DIR$/discovery-server/discovery-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/review-service/review-service.iml" filepath="$PROJECT_DIR$/review-service/review-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/travel-service/travel-service.iml" filepath="$PROJECT_DIR$/travel-service/travel-service.iml" />

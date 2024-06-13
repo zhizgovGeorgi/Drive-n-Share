@@ -1,9 +1,7 @@
 package com.example.travelservice.bussines.impl;
 
 import com.example.travelservice.bussines.TravelService;
-import com.example.travelservice.converter.TravelConverter;
 import com.example.travelservice.dto.UserDeletionPlacedEvent;
-import com.example.travelservice.dto.UserPlacedEvent;
 import com.example.travelservice.model.Travel;
 import com.example.travelservice.persistence.TravelRepository;
 import jakarta.transaction.Transactional;
@@ -15,7 +13,6 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -83,6 +80,7 @@ public class TravelServiceImpl implements TravelService {
             throw new Exception("You cannot delete this travel");
         }
     }
+
 
     @KafkaListener(topics = "userDeletion")
     public void handleDeletedUser(UserDeletionPlacedEvent user) throws Exception {

@@ -3,17 +3,16 @@ package com.example.accountservice.controller;
 import com.example.accountservice.bussines.UserService;
 import com.example.accountservice.converter.UserConverter;
 import com.example.accountservice.domain.User;
-import com.example.accountservice.dto.DeleteUserRequest;
-import com.example.accountservice.dto.UpdateUserRequest;
-import com.example.accountservice.dto.UserRequest;
-import com.example.accountservice.dto.UserResponse;
+import com.example.accountservice.dto.*;
 import com.example.accountservice.exception.DuplicationException;
 import com.example.accountservice.exception.InvalidData;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -58,6 +57,21 @@ public class UserController {
             return ResponseEntity.status(400).body(e.getMessage());
         }
         return ResponseEntity.ok().body("User has been deleted successfully");
+    }
+
+    @PostMapping("/requestDriversAccount")
+    public ResponseEntity<String> requestDriversAccount(@RequestParam("file") MultipartFile file, @RequestParam("email") String email)
+            throws IOException {
+
+        String fileName = service.requestDriversAccount(file, email);
+        return ResponseEntity.ok(fileName);
+    }
+
+    @PostMapping("/respondToRequest")
+    public ResponseEntity<String> requestDriversAccount(@RequestBody RequestResponse requestResponse)
+    {
+
+        return ResponseEntity.ok("The new status is " +  service.respondToDriversRequest(requestResponse));
     }
 
     @GetMapping("/{id}")
