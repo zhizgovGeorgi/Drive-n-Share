@@ -101,11 +101,6 @@ jobs:
     - name: Push the image to Docker Hub
       run: |
         docker push ${{ secrets.DOCKER_USERNAME }}/drive-n-share:travel-service-latest
-
-  minikube:
-   needs: [ docker ]
-   runs-on: ubuntu-latest
-   steps:
     - name: Deploy to Minikube
       run: |
         cd travel-service && kubectl apply -f mysql-travel-deployment.yaml && kubectl apply -f mysql_service-deployment.yaml && kubectl apply -f travel-service-deployment.yaml && kubectl apply -f travel-service-service.yaml
