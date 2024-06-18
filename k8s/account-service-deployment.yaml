@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yaml
+    kompose.version: 1.31.2 (a92241f79)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: account-service
+  name: account-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: account-service
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yaml
+        kompose.version: 1.31.2 (a92241f79)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/drive-n-share-default: "true"
+        io.kompose.service: account-service
+    spec:
+      containers:
+        - env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql_account:3309/dns_account_service
+            - name: SPRING_PROFILES_ACTIVATE
+              value: docker
+          image: zhizgov/drive-n-share:account-service-latest
+          name: account-service
+          ports:
+            - containerPort: 8082
+              hostPort: 8082
+              protocol: TCP
+          resources: {}
+      restartPolicy: Always
+status: {}

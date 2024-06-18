@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
             request.setPassword(encoder.encode(request.getPassword()));
             User newUser = repository.save(request);
             //sends the user to the authentication service, so that it will add it in the auth db
-            kafkaTemplate.send("newUserCreation", new UserPlacedEvent(newUser.getId(), newUser.getEmail(), newUser.getPassword(), newUser.getRole()));
+            kafkaTemplate.send("newUserCreation", new UserPlacedEvent(newUser.getId(), newUser.getEmail(), newUser.getPassword()));
             return newUser;
         }
         else {
