@@ -3,7 +3,7 @@
 set -e
 
 if [ ! -d "$HOME/.config/gcloud" ]; then
-   if [ -z "${APPLICATION_CREDENTIALS-}" ]; then
+   if [ -z "${{secrets.GKE_SA_KEY}}" ]; then
       echo "APPLICATION_CREDENTIALS not found. Exiting...."
       exit 1
    fi
@@ -13,7 +13,7 @@ if [ ! -d "$HOME/.config/gcloud" ]; then
       exit 1
    fi
 
-   echo "$APPLICATION_CREDENTIALS" | base64 -d > /tmp/account.json
+   echo "${{secrets.GKE_SA_KEY}}" | base64 -d > /tmp/account.json
 
    gcloud auth activate-service-account --key-file=/tmp/account.json --project "$PROJECT_ID"
 
