@@ -107,23 +107,43 @@ jobs:
 #       run: |
 #         docker push ${{ secrets.DOCKER_USERNAME }}/drive-n-share:travel-service-latest
 
+ # deploy:
+ #   # needs: [ build-test ]
+ #   runs-on: ubuntu-latest
+ #   steps:
+ #   - uses: actions/checkout@master
+   
+ #   - name: Install kubectl
+ #     run: |
+ #        sudo apt-get update && sudo apt-get install -y kubectl
+ #   - name: kubectl - Google Cloud GKE cluster.
+ #     uses: zhizgovGeorgi/Drive-n-Share/travel-service@main
+ #     env: 
+ #       PROJECT_ID: ${{env.PROJECT_ID}}
+ #       APPLICATION_CREDENTIALS: ${{secrets.GKE_SA_KEY}}
+ #       CLUSTER_NAME: ${{env.GKE_CLUSTER}}
+ #       ZONE_NAME: ${{env.GKE_ZONE}}
+ #     with:
+ #        args: apply -f k8s/
  deploy:
    # needs: [ build-test ]
    runs-on: ubuntu-latest
    steps:
-   - uses: actions/checkout@master
+   - uses: actions/checkout@v4
    
-   - name: Install kubectl
-     run: |
-        sudo apt-get update && sudo apt-get install -y kubectl
-   - name: kubectl - Google Cloud GKE cluster.
-     uses: zhizgovGeorgi/Drive-n-Share/travel-service@main
-     env: 
-       PROJECT_ID: ${{env.PROJECT_ID}}
-       APPLICATION_CREDENTIALS: ${{secrets.GKE_SA_KEY}}
-       CLUSTER_NAME: ${{env.GKE_CLUSTER}}
-       ZONE_NAME: ${{env.GKE_ZONE}}
+   - name: Auth to Google Cloud
+     uses: google-github-actions/auth@v1
+   - name: setup google cloud sdk
+     uses: google-github-actions/setup-gcloud@v1
      with:
-        args: apply -f k8s/
+       version: '367.0.0'
+   - name: Configure kubectl
+     run: |
+       gcloud components update
+       gcloud info --run-diagnostics
+       gcloud container clusters get-credentials cluster-dns-1 --region europe-west1 project ${{secrets.GKE_PROJECT}}
+
+   - name: Deploy to GKE
+     run: kubectl apply -f k8s/
    
     
