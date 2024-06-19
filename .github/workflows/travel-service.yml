@@ -115,7 +115,7 @@ jobs:
    steps:
    - uses: actions/checkout@master
    - name: kubectl - Google Cloud GKE cluster.
-     uses: zhizgovGeorgi/Drive-n-Share@main
+     uses: zhizgovGeorgi/Drive-n-Share/travel-service@main
      env: 
        PROJECT_ID: ${{env.PROJECT_ID}}
        APPLICATION_CREDENTIALS: ${{secrets.GKE_SA_KEY}}
