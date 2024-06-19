@@ -11,7 +11,7 @@ inputs:
     description: 'Project id'
     required: true
   CLUSTER_NAME:
-    description: 'GKE Cluser Name'
+    description: 'GKE Cluster Name'
     required: true
   ZONE_NAME:
     description: 'Zone Name'
