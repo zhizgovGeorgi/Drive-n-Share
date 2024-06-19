@@ -107,8 +107,8 @@ jobs:
 #       run: |
 #         docker push ${{ secrets.DOCKER_USERNAME }}/drive-n-share:travel-service-latest
 
-  deploy:
-   # needs: [ docker ]
+ deploy:
+   # needs: [ build-test ]
    runs-on: ubuntu-latest
    steps:
    - uses: actions/checkout@master
@@ -116,7 +116,6 @@ jobs:
    - name: Install kubectl
      run: |
         sudo apt-get update && sudo apt-get install -y kubectl
-        kubectl apply -f k8s/ 
    - name: kubectl - Google Cloud GKE cluster.
      uses: zhizgovGeorgi/Drive-n-Share/travel-service@main
      env: 
