@@ -10,6 +10,8 @@ COPY ./pom.xml .
 # Copy the rest of the application code
 COPY ./src ./src
 
+COPY entrypoint.sh /entrypoint.sh
+
 # Build the Maven project
 RUN mvn clean install -DskipTests
 
