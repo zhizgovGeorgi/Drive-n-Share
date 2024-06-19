@@ -116,7 +116,7 @@ jobs:
    - name: Install kubectl
      run: |
         sudo apt-get update && sudo apt-get install -y kubectl
-        kubectl apply -f k8s/
+        kubectl apply -f k8s/ --validate=false
    - name: kubectl - Google Cloud GKE cluster.
      uses: zhizgovGeorgi/Drive-n-Share/travel-service@main
      env: 
