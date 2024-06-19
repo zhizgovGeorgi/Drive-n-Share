@@ -113,7 +113,7 @@ jobs:
    steps:
    - uses: actions/checkout@master
    - name: kubectl - Google Cloud GKE cluster.
-     uses: docker pull ${{ secrets.DOCKER_USERNAME }}/drive-n-share:travel-service-latest
+     uses: zhizgov/drive-n-share:travel-service-latest
      env: 
        PROJECT_ID: ${{env.PROJECT_ID}}
        APPLICATION_CREDENTIALS: ${{secrets.GKE_SA_KEY}}
