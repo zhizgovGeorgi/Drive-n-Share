@@ -107,7 +107,7 @@ jobs:
       run: |
         docker push ${{ secrets.DOCKER_USERNAME }}/drive-n-share:travel-service-latest
     - name: kubectl - Google Cloud GKE cluster.
-      uses: ${{ secrets.DOCKER_USERNAME }}/drive-n-share:travel-service-latest
+      uses: docker pull ${{ secrets.DOCKER_USERNAME }}/drive-n-share:travel-service-latest
       env: 
        PROJECT_ID: ${{env.PROJECT_ID}}
        APPLICATION_CREDENTIALS: ${{secrets.GKE_SA_KEY}}
