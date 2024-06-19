@@ -14,7 +14,12 @@ on:
     paths:
     - '.github/workflows/travel-service.yml'
     - 'travel-service/**'
-     
+
+    
+env:
+ PROJECT_ID: ${{secrets.GKE_PROJECT}}
+ GKE_CLUSTER: cluster-dns-1
+ GKE_ZONE: europe-west1
 
      
        
@@ -101,21 +106,29 @@ jobs:
     - name: Push the image to Docker Hub
       run: |
         docker push ${{ secrets.DOCKER_USERNAME }}/drive-n-share:travel-service-latest
-    - name: Deploy to Minikube
-      run: |
-        cd travel-service && kubectl apply -f mysql-travel-deployment.yaml --validate=false && kubectl apply -f mysql_service-deployment.yaml && kubectl apply -f travel-service-deployment.yaml && kubectl apply -f travel-service-service.yaml
-
-#  minikube:
-#   needs: [ docker ]
-#   runs-on: ubuntu-latest
-#   steps:
-#    - name: Deploy to Minikube
-#      run: |
-#        cd travel-service
-#        kubectl apply -f mysql-travel-deployment.yaml
-#        kubectl apply -f mysql_service-deployment.yaml
-#        kubectl apply -f travel-service-deployment.yaml
-#        kubectl apply -f travel-service-service.yaml
-
+    - name: kubectl - Google Cloud GKE cluster.
+      uses: docker pull ${{ secrets.DOCKER_USERNAME }}/drive-n-share:travel-service-latest
+      env: 
+       PROJECT_ID: ${{env.PROJECT_ID}}
+       APPLICATION_CREDENTIALS: ${{secrets.GKE_SA_KEY}}
+       CLUSTER_NAME: ${{env.GKE_CLUSTER}}
+       ZONE_NAME: ${{env.GKE_ZONE}}
+      with:
+        args: apply -f k8s/    
+        
+  # deploy:
+  #  # needs: [ docker ]
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #  - uses: actions/checkout@master
+  #  - name: kubectl - Google Cloud GKE cluster.
+  #    uses: zhizgovGeorgi/Drive-n-Share/travel-service@main
+  #    env: 
+  #      PROJECT_ID: ${{env.PROJECT_ID}}
+  #      APPLICATION_CREDENTIALS: ${{secrets.GKE_SA_KEY}}
+  #      CLUSTER_NAME: ${{env.GKE_CLUSTER}}
+  #      ZONE_NAME: ${{env.GKE_ZONE}}
+  #    with:
+  #       args: apply -f k8s/
    
     
