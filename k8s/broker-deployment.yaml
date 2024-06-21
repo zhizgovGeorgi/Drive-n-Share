@@ -42,10 +42,10 @@ spec:
               value: zookeeper:2181
           image: confluentinc/cp-kafka:7.0.1
           name: broker
-          ports:
-            - containerPort: 9092
-              hostPort: 9092
-              protocol: TCP
+          # ports:
+          #   - containerPort: 9092
+          #     hostPort: 9092
+          #     protocol: TCP
           resources: {}
       restartPolicy: Always
 status: {}
