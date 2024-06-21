@@ -32,10 +32,10 @@ spec:
               value: docker
           image: zhizgov/drive-n-share:travel-service-latest
           name: travelservice
-          ports:
-            - containerPort: 8081
-              hostPort: 8081
-              protocol: TCP
+          # ports:
+          #   - containerPort: 8081
+          #     hostPort: 8081
+          #     protocol: TCP
           resources:
             limits:
               cpu: "1000m"
