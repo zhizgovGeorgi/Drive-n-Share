@@ -6,14 +6,15 @@ metadata:
     kompose.version: 1.31.2 (a92241f79)
   creationTimestamp: null
   labels:
-    io.kompose.service: travel-service
-  name: travel_service
+    io.kompose.service: travelservice
+  name: travelservice
 spec:
+  type: LoadBalancer
   ports:
     - name: "8081"
       port: 8081
       targetPort: 8081
   selector:
-    io.kompose.service: travel-service
+    io.kompose.service: travelservice
 status:
-  loadBalancer: {}
+  loadBalancer	: {}

@@ -50,9 +50,9 @@ services:
      - "9090:9090"
    volumes:
      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-   depends_on:
-     - travel_service
-     - account_service
+#   depends_on:
+#     - travel_service
+#     - account_service
 #     - api_gateway
 
  grafana:
@@ -69,103 +69,103 @@ services:
        - GF_SECURITY_ADMIN_USER=admin
        - GF_SECURITY_ADMIN_PASSWORD=password
 
- mysql_travel:
-   ports:
-     - "3308:3308"
-   expose:
-     - "3308"
-   image: mysql:8
-   container_name: mysql_travel
-   environment:
-     MYSQL_DATABASE: 'dns_travel_service'
-     MYSQL_ROOT_PASSWORD: '1234567'
-     MYSQL_TCP_PORT: '3308'
+# mysqltravel:
+#   ports:
+#     - "3308:3308"
+#   expose:
+#     - "3308"
+#   image: mysql:8
+#   container_name: mysqltravel
+#   environment:
+#     MYSQL_DATABASE: 'dns_travel_service'
+#     MYSQL_ROOT_PASSWORD: '1234567'
+#     MYSQL_TCP_PORT: '3308'
+
+#
+# mysql_account:
+#   ports:
+#     - "3309:3309"
+#   expose:
+#     - "3309"
+#   image: mysql:8
+#   container_name: mysql_account
+#   environment:
+#     MYSQL_DATABASE: 'dns_account_service'
+#     MYSQL_ROOT_PASSWORD: '1234567'
+#     MYSQL_TCP_PORT: '3309'
+#
+#
+# mysql_review:
+#   ports:
+#     - "3305:3305"
+#   expose:
+#     - "3305"
+#   image: mysql:8
+#   container_name: mysql_review
+#   environment:
+#     MYSQL_DATABASE: 'dns_review_service'
+#     MYSQL_ROOT_PASSWORD: '1234567'
+#     MYSQL_TCP_PORT: '3305'
+#
+#
+#
+#
+# travelservice:
+#       image: zhizgov/drive-n-share:travel-service-latest
+#       container_name: travelservice
+#       ports:
+#         - "8081:8081"
+#       environment:
+##         EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery_server:8761/eureka
+#         SPRING_DATASOURCE_URL: jdbc:mysql://mysqltravel:3308/dns_travel_service
+#         SPRING_PROFILES_ACTIVATE: docker
+#       depends_on:
+#         -  mysqltravel
+
+# account_service:
+#     image: zhizgov/drive-n-share:account-service-latest
+#     container_name: account_service
+#     ports:
+#       - "8082:8082"
+#     environment:
+#       SPRING_DATASOURCE_URL: jdbc:mysql://mysql_account:3309/dns_account_service
+#       SPRING_PROFILES_ACTIVATE: docker
+#     depends_on:
+#       - mysql_account
+#
+#
+# review_service:
+#   image: zhizgov/drive-n-share:review-service-latest
+#   container_name: review_service
+#   #       build:
+#   #         dockerfile: ./travel-service/Dockerfile
+#   ports:
+#     - "8083:8083"
+#   environment:
+#     SPRING_DATASOURCE_URL: jdbc:mysql://mysql_review:3305/dns_review_service
+#     SPRING_DATASOURCE_USERNAME: root
+#     SPRING_DATASOURCE_PASSWORD: 1234567
+#   depends_on:
+#     - mysql_review
+#
+# api_gateway:
+#   image: zhizgov/drive-n-share:api-gateway-latest
+#   container_name: api_gateway
+#   ports:
+#     - "8084:8084"
+#   environment:
+#     SPRING_PROFILES_ACTIVATE: docker
 
 
- mysql_account:
-   ports:
-     - "3309:3309"
-   expose:
-     - "3309"
-   image: mysql:8
-   container_name: mysql_account
-   environment:
-     MYSQL_DATABASE: 'dns_account_service'
-     MYSQL_ROOT_PASSWORD: '1234567'
-     MYSQL_TCP_PORT: '3309'
 
-
- mysql_review:
-   ports:
-     - "3305:3305"
-   expose:
-     - "3305"
-   image: mysql:8
-   container_name: mysql_review
-   environment:
-     MYSQL_DATABASE: 'dns_review_service'
-     MYSQL_ROOT_PASSWORD: '1234567'
-     MYSQL_TCP_PORT: '3305'
-
-
-
-
- travel_service:
-       image: zhizgov/drive-n-share:travel-service-latest
-       container_name: travel_service
-       ports:
-         - "8081:8081"
-       environment:
-         EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery_server:8761/eureka
-         SPRING_DATASOURCE_URL: jdbc:mysql://mysql_travel:3308/dns_travel_service
-         SPRING_PROFILES_ACTIVATE: docker
-       depends_on:
-         -  mysql_travel
-
- account_service:
-     image: zhizgov/drive-n-share:account-service-latest
-     container_name: account_service
-     ports:
-       - "8082:8082"
-     environment:
-       SPRING_DATASOURCE_URL: jdbc:mysql://mysql_account:3309/dns_account_service
-       SPRING_PROFILES_ACTIVATE: docker
-     depends_on:
-       - mysql_account
-
-
- review_service:
-   image: zhizgov/drive-n-share:review-service-latest
-   container_name: review_service
-   #       build:
-   #         dockerfile: ./travel-service/Dockerfile
-   ports:
-     - "8083:8083"
-   environment:
-     SPRING_DATASOURCE_URL: jdbc:mysql://mysql_review:3305/dns_review_service
-     SPRING_DATASOURCE_USERNAME: root
-     SPRING_DATASOURCE_PASSWORD: 1234567
-   depends_on:
-     - mysql_review
-
- api_gateway:
-   image: zhizgov/drive-n-share:api-gateway-latest
-   container_name: api_gateway
-   ports:
-     - "8084:8084"
-   environment:
-     SPRING_PROFILES_ACTIVATE: docker
-
-
-
- discovery_server:
-   image: zhizgov/drive-n-share:discovery-server-latest
-   container_name: discovery_server
-   ports:
-     - "8761:8761"
-   environment:
-     SPRING_PROFILES_ACTIVATE: docker
-
+# discovery_server:
+#   image: zhizgov/drive-n-share:discovery-server-latest
+#   container_name: discovery_server
+#   ports:
+#     - "8761:8761"
+#   environment:
+#     SPRING_PROFILES_ACTIVATE: docker
+#
 
 volumes:
   keycloak_data:

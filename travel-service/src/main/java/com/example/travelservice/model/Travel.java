@@ -27,6 +27,14 @@ public class Travel {
     @NonNull
     private String departureDate;
 
+    public void setStartDate(String startPoint)throws IllegalArgumentException {
+        int MAX_LENGTH = 256;
+        if (startPoint.length() <= MAX_LENGTH) {
+            this.startPoint = startPoint;
+        } else {
+            throw new IllegalArgumentException("Input is too long");
+        }
+    }
 
 public void setEndPoint(String endPoint)throws InvalidData{
     if(endPoint == this.startPoint){
@@ -34,6 +42,7 @@ public void setEndPoint(String endPoint)throws InvalidData{
     }
     else{
         this.endPoint = endPoint;
+        this.setStartPoint("starrt");
     }
 }
 }
