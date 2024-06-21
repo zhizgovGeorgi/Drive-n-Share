@@ -34,10 +34,10 @@ spec:
               value: "3308"
           image: mysql:8
           name: mysqltravel
-          ports:
-            - containerPort: 3308
-              hostPort: 3308
-              protocol: TCP
+          # ports:
+          #   - containerPort: 3308
+          #     hostPort: 3308
+          #     protocol: TCP
           resources: {}
       restartPolicy: Always
 status: {}
