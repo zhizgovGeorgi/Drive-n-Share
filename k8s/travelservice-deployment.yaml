@@ -27,7 +27,7 @@ spec:
       containers:
         - env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:mysql://34.90.46.49:3308/dns_travel_service
+              value: jdbc:mysql://34.34.61.97:3308/dns_travel_service
             - name: SPRING_PROFILES_ACTIVATE
               value: docker
             # - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
