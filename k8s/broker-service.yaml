@@ -1,19 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    kompose.cmd: kompose convert -f docker-compose.yaml
-    kompose.version: 1.31.2 (a92241f79)
-  creationTimestamp: null
-  labels:
-    io.kompose.service: broker
   name: broker
+  labels:
+    app: broker
 spec:
+  selector:
+    app: broker
   ports:
-    - name: "9092"
+    - protocol: TCP
       port: 9092
       targetPort: 9092
-  selector:
-    io.kompose.service: broker
-status:
-  loadBalancer: {}
+  type: LoadBalancer
