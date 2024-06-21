@@ -7,7 +7,7 @@ metadata:
   creationTimestamp: null
   labels:
     io.kompose.service: mysqltravel
-  name: mysqltravelservice
+  name: mysqltravel
 spec:
   ports:
     - name: "3308"
