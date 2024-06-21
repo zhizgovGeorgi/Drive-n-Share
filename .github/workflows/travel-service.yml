@@ -141,6 +141,12 @@ jobs:
        version: '367.0.0'
    - name: Configure kubectl
      run: |
+       gcloud config unset auth/credential_file_override
+       gcloud config unset metrics/environment_version
+       gcloud auth application-default revoke
+       gcloud auth revoke --all
+       gcloud config configurations delete default
+       gcloud init
        gcloud components update
        gcloud info --run-diagnostics
        gcloud container clusters get-credentials dns-cluster1 --region europe-west4 --project ${{env.PROJECT_ID}}
