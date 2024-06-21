@@ -18,7 +18,7 @@ on:
     
 env:
  PROJECT_ID: ${{secrets.GKE_PROJECT}}
- GKE_CLUSTER: dns-cluster1
+ GKE_CLUSTER: dns-cluster
  GKE_ZONE: europe-west4
 
      
@@ -142,7 +142,7 @@ jobs:
    - name: GKE Cluster
      run: |
        gcloud components update
-       gcloud container clusters get-credentials dns-cluster1 --region europe-west4 --project ${{env.PROJECT_ID}}
+       gcloud container clusters get-credentials dns-cluster --region europe-west4 --project ${{env.PROJECT_ID}}
 
    - name: Deploy to GKE
      run: kubectl apply -f k8s/
