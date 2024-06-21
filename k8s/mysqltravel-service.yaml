@@ -8,7 +8,7 @@ spec:
   selector:
     app: mysqltravel
   ports:
-    - protocol: TCP
-      port: 3308
-      targetPort: 3308
+    - containerPort: 3308
+      hostPort: 3308
+      protocol: TCP
   type: LoadBalancer
