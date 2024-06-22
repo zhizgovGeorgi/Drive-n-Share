@@ -57,13 +57,6 @@ spec:
         app: mysqltravel
     spec:
       containers:
-        - env:
-            - name: MYSQL_DATABASE
-              value: dns_travel_service
-            - name: MYSQL_ROOT_PASSWORD
-              value: "1234567"
-            - name: MYSQL_TCP_PORT
-              value: "3308"
           image: mysql:8
         - env:
             - name: MYSQL_DATABASE
