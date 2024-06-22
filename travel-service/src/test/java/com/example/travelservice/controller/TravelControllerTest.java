@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -35,7 +36,7 @@ public class TravelControllerTest {
     private TravelService service;
     @Autowired
     private TravelController controller;
-
+    private String jwtToken = "Bearer ";
     @Test
     void testCreateTravel_shouldSuccessfullyReturnCreatedTravel() throws Exception {
         //ARRANGE
@@ -46,6 +47,7 @@ public class TravelControllerTest {
         //ACT
         when(service.save(any(Travel.class))).thenReturn(new Travel(1L, request.getStartPoint(), request.getEndPoint(), request.getPricePerPerson(), request.getDriverId(), request.getDepartureDate()));
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/travels")
+//                .header(HttpHeaders.AUTHORIZATION,"Bearer " + jwtToken)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content);
         //ASSERT

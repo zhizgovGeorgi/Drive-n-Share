@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Outlet } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
-
+import login from '../functions/LogIn';
 
 // const useStyles = makeStyles((theme) => ({
 //   root: {
@@ -16,23 +16,21 @@ import { Link, useNavigate } from 'react-router-dom';
 
 export default function Login() {
   
-//   const navigate = useNavigate();
+  const navigate = useNavigate();
   
     // const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto "}
   const [email, setEmail]=useState('');
   const [password, setPassword]=useState('');
 //     // const classes = useStyles();
-const login =  () =>{
-    const user={email, password}
+const logIn = async()=>{
     console.log(email);
     console.log(password);
-
+    login({email, password}).then(res=>{
+        navigate("/home");
+toast.success("Welcome ", res.data)
+      })
   
-     AccountService.register({user}).then(res=>{
-      // navigate('/login') 
-      toast.success("Successful registration! Time to log in!")
-      // navigate("/login")
-    })
+    
 }  
     
   
@@ -51,7 +49,7 @@ const login =  () =>{
     </div>
 
     <div className='loginButton'>
-        <button onClick={login}>
+        <button onClick={logIn}>
             Log in
         </button>
     </div>

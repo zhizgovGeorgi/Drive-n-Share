@@ -67,7 +67,7 @@ public class TravelServiceImpl implements TravelService {
 
     @Override
     public List<Travel> findAll(int pageNumber) {
-        Pageable firstPageable = PageRequest.of(pageNumber, 20);
+        Pageable firstPageable = PageRequest.of(pageNumber, 10);
         return repository.findAll(firstPageable).toList();
     }
 

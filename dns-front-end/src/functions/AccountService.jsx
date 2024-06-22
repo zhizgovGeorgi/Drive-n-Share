@@ -31,6 +31,13 @@ const register =  (user) => {
   })
   }
 
+  const logout = () => {
+    sessionStorage.clear();
+    window.location.reload();
+ }
+ 
+
     export default  {
-        register
+        register,
+        logout
     }
