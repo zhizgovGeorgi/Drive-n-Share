@@ -1,21 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysqltravel
+  name: msqltravel
   namespace: mysqltravel
 spec:
+  type: LoadBalancer
   replicas: 1
   selector:
-    matchLabels:
-      io.kompose.service: mysqltravel
-  strategy: {}
+    app: mysqltravel
   template:
     metadata:
       labels:
         app: mysqltravel
     spec:
       containers:
-        - env:
+          env:
             - name: MYSQL_DATABASE
               value: dns_travel_service
             - name: MYSQL_ROOT_PASSWORD
@@ -24,13 +23,10 @@ spec:
               value: "3308"
           image: mysql:8
           name: mysqltravel
-          # ports:
-          #   - containerPort: 3308
-          #     hostPort: 3308
-          #     protocol: TCP
-          resources: {}
-      restartPolicy: Always
-status: {}
+          ports:
+            - containerPort: 3308
+              hostPort: 3308
+              protocol: TCP
 # apiVersion: apps/v1
 # kind: Deployment
 # metadata:
