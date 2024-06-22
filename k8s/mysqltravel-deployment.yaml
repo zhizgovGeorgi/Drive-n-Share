@@ -58,7 +58,7 @@ spec:
     spec:
       containers:
           image: mysql:8
-        - env:
+          env:
             - name: MYSQL_DATABASE
               value: dns_travel_service
             - name: MYSQL_ROOT_PASSWORD
