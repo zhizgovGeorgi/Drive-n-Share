@@ -65,3 +65,6 @@ spec:
               value: "1234567"
             - name: MYSQL_TCP_PORT
               value: 3308
+                        resources: {}
+      restartPolicy: Always
+status: {}
