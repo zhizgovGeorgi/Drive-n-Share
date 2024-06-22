@@ -1,19 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: msqltravel
-  namespace: mysqltravel
+  name: mysqltravel
+  namespace: default
 spec:
-  type: LoadBalancer
-  replicas: 1
   selector:
-    app: mysqltravel
+    matchLabels:
+      app: mysqltravel
+  replicas: 1
   template:
     metadata:
       labels:
         app: mysqltravel
     spec:
       containers:
+        - name: mysqltravel
+          image: mysql:8
+          ports:
+            - containerPort: 3308
           env:
             - name: MYSQL_DATABASE
               value: dns_travel_service
@@ -21,10 +25,7 @@ spec:
               value: "1234567"
             - name: MYSQL_TCP_PORT
               value: "3308"
-          image: mysql:8
-          name: mysqltravel
-          ports:
-            - containerPort: 3308
+
 # apiVersion: apps/v1
 # kind: Deployment
 # metadata:
