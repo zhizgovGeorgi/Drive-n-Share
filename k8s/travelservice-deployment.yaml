@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: travel-service
+  name: travelservice
   namespace: default
 spec:
   selector:
     matchLabels:
-      app: travel-service
+      app: travelservice
   replicas: 1
   template:
     metadata:
@@ -14,7 +14,7 @@ spec:
         app: travelservice
     spec:
       containers:
-        - name: travel-service
+        - name: travelservice
           image: zhizgov/drive-n-share:travel-service-latest
           env:
             - name: SPRING_DATASOURCE_URL
