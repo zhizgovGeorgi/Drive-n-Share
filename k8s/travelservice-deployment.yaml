@@ -11,7 +11,7 @@ spec:
   template:
     metadata:
       labels:
-        app: travel-service
+        app: travelservice
     spec:
       containers:
         - name: travel-service
@@ -21,8 +21,8 @@ spec:
               value: jdbc:mysql://34.91.34.252:3308/dns_travel_service
             - name: SPRING_PROFILES_ACTIVATE
               value: docker
-            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
-              value: 34.90.92.13:9092
+            # - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+            #   value: 34.90.92.13:9092
 # apiVersion: apps/v1
 # kind: Deployment
 # metadata:
