@@ -34,11 +34,6 @@ export default function Register() {
 const register =  () =>{
     if(isChecked){
     const user={firstName, lastName, email, adress, password, role}
-    console.log(firstName);
-    console.log(lastName);
-    console.log(adress);
-    console.log(email);
-    console.log(password);
 
   
      AccountService.register({user}).then(res=>{
@@ -46,7 +41,7 @@ const register =  () =>{
       toast.success("Successful registration! Time to log in!")
     })
 }
-else{
+else if(!isChecked){
     toast.error("Please consent to our privacy policy")
 }
 }  
@@ -56,6 +51,9 @@ else{
   
    return (
     <div className='registerPanel'>
+        <div className='bigName'>
+  <h1>Register</h1>
+</div>
     <div className='registerproperties'>
     <label for="fname">First name:</label>
     <input onChange={(e)=>setFName(e.target.value)} type="text" id="fname" name="fname"/>

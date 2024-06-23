@@ -15,6 +15,7 @@ class AuthService:
         self.token_expiry = 0
         self.client_id = 'dns-client'
         self.kafka_topic = 'newUserCreation'
+        self.kafka_topic2 = 'userDeletion'
         self.kafka_bootstrap_servers = ['localhost:9092']
         self.start_kafka_consumer()
         # self.consumer = KafkaConsumer(
@@ -56,9 +57,20 @@ class AuthService:
                 group_id='auth_service_group',
                 value_deserializer=lambda x: json.loads(x.decode('utf-8'))
             )
+            consumer2 = KafkaConsumer(
+                self.kafka_topic2,
+                bootstrap_servers=self.kafka_bootstrap_servers,
+                auto_offset_reset='earliest',
+                enable_auto_commit=True,
+                group_id='auth_service_group',
+                value_deserializer=lambda x: json.loads(x.decode('utf-8'))
+            )
             for message in consumer:
                 user_data = message.value
                 self.create_user(user_data)
+            for message in consumer2:
+                user_data = message.value
+                self.delete_user(user_data)
 
         thread = threading.Thread(target=kafka_consumer_thread)
         thread.daemon = True

@@ -85,6 +85,17 @@ public class UserController {
         }
     }
 
+    @PostMapping("/profile")
+    public ResponseEntity<User> getUserByEmail(@RequestParam(value = "email") String email)throws InvalidData{
+        try {
+            User user = service.findByEmail(email);
+            return ResponseEntity.ok().body(user);
+        }
+        catch (InvalidData err){
+            throw err;
+        }
+    }
+
     @PutMapping
     public ResponseEntity<UserResponse> updateUser(@RequestBody UpdateUserRequest request)throws InvalidData{
         try{

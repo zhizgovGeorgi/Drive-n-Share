@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
         if (!userForDeletion.equals(deletingUser)){
             throw new IllegalArgumentException("You do not have the right to delete this account");
         }
-        kafkaDeletionTemplate.send("userDeletion", new UserDeletionPlacedEvent(id.longValue()));
+        kafkaDeletionTemplate.send("userDeletion", new UserDeletionPlacedEvent(id.longValue(), blobUserToDelete.getEmail()));
         azureBlobStorageService.deleteBlob(blobUserToDelete.getEmail());
         repository.deleteById(id);
         //sends it to the rest of the services, where everything related to the user will be deleted

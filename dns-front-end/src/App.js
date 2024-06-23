@@ -7,6 +7,8 @@ import Register from './components/Register.jsx';
 import Login from './components/Login.jsx';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Profile from './components/Profile.jsx';
+import ManageTravels from './components/ManageTravels.jsx';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ theme="light"
         <Routes>
         <Route path='/register' element={ <Register/>} />
         <Route path='/login' element={ <Login/>} />
+        <Route path='/profile' element={ <Profile/>} />
+        <Route path='/manageTravels' element={ <ManageTravels/>} />
           
 
         </Routes>

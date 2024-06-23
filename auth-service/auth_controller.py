@@ -21,7 +21,7 @@ class UserApp:
         @users_app.route('/create_user', methods=['POST'])
         def create_user():
             data = request.json
-            username = data.get('username')
+            username = data.get('email')
             password = data.get('password')
             email = data.get('email')
 

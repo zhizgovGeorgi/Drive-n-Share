@@ -7,11 +7,16 @@ import { useState, useEffect } from 'react';
 export default function Navbar() {
   const navigate = useNavigate();
   const [buttons, setButtons] = useState(null);
+
+  const logout =()=>{
+    AccountService.logout();
+    navigate("/login")
+  }
   
   useEffect(()=>{
     const role = sessionStorage.getItem("role");
 
-    if (role === "[Administrator]" ) {
+    if (role === "Administrator" ) {
      setButtons(<>
      <li> <button className='navbarbutton'><Link to={'/home'}><a>Home</a></Link></button> </li>
      <li> <button className='navbarbutton'><Link to={'/profile'}><a>Profile</a></Link></button> </li>
@@ -20,11 +25,22 @@ export default function Navbar() {
      </>);
      
     }
-    else if (role === "[Driver]" ) {
+    else if (role === "Driver" ) {
       setButtons(<>
        
        <ul>
-      <li> <button className='navbarbutton'><Link to={'/manageTravels'}><a>Manage Travels</a></Link></button> </li>
+      <li> <button className='navbarbutton'><Link to={'/home'}><a>Home</a></Link></button> </li>
+      <li> <button className='navbarbutton'><Link to={'/profile'}><a>Profile</a></Link></button> </li>
+      <li> <button className='navbarbutton'><Link to={'/manageTravels'}><a>Manage travels</a></Link></button> </li>
+      <li> <button onClick={AccountService.logout} className='navbarbutton'><Link to={'/register'}><a>Log Out</a></Link></button> </li>
+      </ul>
+      </>);
+      
+     }
+     else if (role === "Drivee" || role ==="Driver-to-be" ) {
+      setButtons(<>
+       
+       <ul>
       <li> <button className='navbarbutton'><Link to={'/home'}><a>Home</a></Link></button> </li>
       <li> <button className='navbarbutton'><Link to={'/profile'}><a>Profile</a></Link></button> </li>
       <li> <button onClick={AccountService.logout} className='navbarbutton'><Link to={'/register'}><a>Log Out</a></Link></button> </li>

@@ -12,4 +12,5 @@ public class UserDeletionPlacedEvent {
 
     }
     private Long driverId;
+    private String email;
 }

@@ -45,6 +45,8 @@ li{
 
 .registerPanel, .loginpanel{
   display: grid;
+  justify-content: center;
+  align-items: center;
 
 }
 
