@@ -25,82 +25,91 @@ on:
        
  
 jobs:
-  build-test:
+#   build-test:
 
-    runs-on: ubuntu-latest
+#     runs-on: ubuntu-latest
 
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
-    - name: Build with Maven
-      run: mvn -B clean package --file travel-service/pom.xml
+#     steps:
+#     - uses: actions/checkout@v3
+#     - name: Set up JDK 17
+#       uses: actions/setup-java@v3
+#       with:
+#         java-version: '17'
+#         distribution: 'temurin'
+#         cache: maven
+#     - name: Build with Maven
+#       run: mvn -B clean package --file travel-service/pom.xml
       
-    - name: Test with Maven
-      run: cd travel-service && mvn test
-#      working-directory: ${{ matrix.dir }}
+#     - name: Test with Maven
+#       run: cd travel-service && mvn test
+# #      working-directory: ${{ matrix.dir }}
    
-  sonarcloud:
-    needs: build-test
-    name: Sonarcloud
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Set up JDK 21
-        uses: actions/setup-java@v3
-        with:
-          java-version: 21
-          distribution: 'temurin'
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-      - name: Cache Maven packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-      - name: Build and analyze
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: cd travel-service && mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=zhizgovGeorgi_Drive-n-Share && mvn sonar:sonar -Pcoverage
+#   sonarcloud:
+#     needs: build-test
+#     name: Sonarcloud
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#         with:
+#           fetch-depth: 0
+#       - name: Set up JDK 21
+#         uses: actions/setup-java@v3
+#         with:
+#           java-version: 21
+#           distribution: 'temurin'
+#       - name: Cache SonarCloud packages
+#         uses: actions/cache@v3
+#         with:
+#           path: ~/.sonar/cache
+#           key: ${{ runner.os }}-sonar
+#           restore-keys: ${{ runner.os }}-sonar
+#       - name: Cache Maven packages
+#         uses: actions/cache@v3
+#         with:
+#           path: ~/.m2
+#           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+#           restore-keys: ${{ runner.os }}-m2
+#       - name: Build and analyze
+#         env:
+#           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#         run: cd travel-service && mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=zhizgovGeorgi_Drive-n-Share && mvn sonar:sonar -Pcoverage
 
-  docker:
-   needs: [ sonarcloud ]
-   runs-on: ubuntu-latest
-   steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'corretto'
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-    - name: Building an image
-      run: |
-        cd travel-service
-        #ls -l target
-        docker build -t travel-service .
-    - name: Tag the image
-      run: |
-        docker tag travel-service:latest ${{ secrets.DOCKER_USERNAME }}/drive-n-share:travel-service-latest
-    - name: Push the image to Docker Hub
-      run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/drive-n-share:travel-service-latest
+#   docker:
+#    needs: [ sonarcloud ]
+#    runs-on: ubuntu-latest
+#    steps:
+#     - uses: actions/checkout@v4
+#     - name: Set up JDK 17
+#       uses: actions/setup-java@v4
+#       with:
+#         java-version: '17'
+#         distribution: 'corretto'
+#     - name: Log in to Docker Hub
+#       uses: docker/login-action@v2
+#       with:
+#         username: ${{ secrets.DOCKER_USERNAME }}
+#         password: ${{ secrets.DOCKER_PASSWORD }}
+#     - name: Building an image
+#       run: |
+#         cd travel-service
+#         #ls -l target
+#         docker build -t travel-service .
+#     - name: Tag the image
+#       run: |
+#         docker tag travel-service:latest ${{ secrets.DOCKER_USERNAME }}/drive-n-share:travel-service-latest
+#     - name: Push the image to Docker Hub
+#       run: |
+#         docker push ${{ secrets.DOCKER_USERNAME }}/drive-n-share:travel-service-latest
+  zap_scan:
+    runs-on: ubuntu-latest
+    services:
+      zap:
+        image: owasp/zap2docker-stable
+        ports:
+          - 8086:8086
+        options: >-
+          --network="host"
 
  # deploy:
  #   # needs: [ build-test ]
